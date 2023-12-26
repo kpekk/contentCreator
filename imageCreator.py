@@ -4,7 +4,7 @@ def generate_image(client, prompt, output_folder, output_file_name):
 
     response = client.images.generate(
         model="dall-e-3",
-        prompt=prompt,
+        prompt=prompt + ". Also, please make sure to generate the images upright (vertical, not landscape).",
         size="1024x1792", # 9/16 ratio
         quality="standard",
         n=1,
