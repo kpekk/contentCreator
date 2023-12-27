@@ -35,6 +35,8 @@ def add_subtitles_to_video(working_directory,
 
                 srt_file.write(f"{i}\n{start_time} --> {end_time}\n{text}\n\n")
 
+    print("[info]    Successfully created subtitles file")
+
     # Load your video
     video_clip = VideoFileClip(f"{working_directory}/{video_file_name}")
 
@@ -50,3 +52,5 @@ def add_subtitles_to_video(working_directory,
 
     # Write the result to a file
     final.write_videofile(f"{working_directory}/{output_video_file_name}", codec="libx264")
+
+    print("[info]    Successfully added subtitles to video")

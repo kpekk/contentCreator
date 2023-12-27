@@ -1,12 +1,7 @@
 #from https://medium.com/p/150e698743b5, big ty
 
-import os
-import glob
+import os, shutil
 from PIL import Image
-
-def remove_generated_images(directory, file_name_with_wildcard):
-    for filename in glob.glob(f'{directory}/{file_name_with_wildcard}'):
-        os.remove(filename)
 
 def generate_video_from_image(
     working_folder,
@@ -23,7 +18,7 @@ def generate_video_from_image(
 
     for i in range(duration):
         
-        if (i+1) % 100 == 0:
+        if (i+1) % 50 == 0:
             print(f'[info]    Created frame no.{i+1}')
 
         # the factor that we use to interpolate between the initial and final values
@@ -57,6 +52,7 @@ ffmpeg -y -framerate {frame_rate} -i {os.path.join(output_folder, f'frame-%d.png
     '''.strip()
     os.system(cmd)
 
-    remove_generated_images(output_folder, 'frame-*')
+    #delete all the generated images
+    shutil.rmtree(output_folder)
 
     print('[info]    Successfully created the initial video')

@@ -1,16 +1,17 @@
 import os
-from common import get_openai_api_key
-from openai import OpenAI
+from common import get_openai_client
 from ideaGenerator import generate_ideas
 from imageCreator import generate_image
-from imageToVideo import generate_video_from_image
-from addSubtitlesToVideo import add_subtitles_to_video
+from videoGenerator import generate_video_from_image
+from subtitleManager import add_subtitles_to_video
 from voiceGenerator import generate_commentary_audio
+from voiceoverToVideo import add_audio_to_video
 
 #todo generate voice of length n, make sure video and voice are almost as long
+# todo make video, commentary etc names parameters not hardcoded into smaller files
 
 count = 2
-client = OpenAI(api_key=get_openai_api_key())
+client = get_openai_client()
 
 # generate prompts
 generate_ideas(client, count)
@@ -43,6 +44,8 @@ with open('output/list_of_ideas.txt', 'r') as file:
         generate_commentary_audio(client, commentary, output_directory)
 
         # add voiceover to video
+        add_audio_to_video(f"{output_directory}/initial_video.mp4", f"{output_directory}/commentary.mp3",
+                           output_directory, start_delay=0) # todo increase start delay to 0.3/0.4
 
         # add subtitles
         add_subtitles_to_video(output_directory, "initial_video.mp4", "video_with_subtitles.mp4", 
