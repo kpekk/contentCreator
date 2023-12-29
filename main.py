@@ -7,8 +7,16 @@ from subtitleManager import add_subtitles_to_video
 from voiceGenerator import generate_commentary_audio
 from voiceoverToVideo import add_audio_to_video
 
-#todo generate voice of length n, make sure video and voice are almost as long
+# TODO generate voice of length n, make sure video and voice are almost as long
 # todo make video, commentary etc names parameters not hardcoded into smaller files
+# todo delay for audio and subtitles, about 0.2, 0.3
+# TODO text file into folder with title, description? and tags
+
+def clean_everything_but_final_video(working_directory, file_to_keep="final_video.mp4"):
+    for file in os.listdir(working_directory):
+        if file != file_to_keep:
+            file_path = os.path.join(working_directory, file)
+            os.remove(file_path)
 
 count = 2
 client = get_openai_client()
@@ -48,8 +56,9 @@ with open('output/list_of_ideas.txt', 'r') as file:
                            output_directory, start_delay=0) # todo increase start delay to 0.3/0.4
 
         # add subtitles
-        add_subtitles_to_video(output_directory, "initial_video.mp4", "video_with_subtitles.mp4", 
+        add_subtitles_to_video(output_directory, "video_with_voiceover.mp4", "final_video.mp4", 
                                "commentary.mp3", "subtitles.srt")
 
-
+        clean_everything_but_final_video(output_directory)
+        break
         # upload video to yt (title, hastags?)
