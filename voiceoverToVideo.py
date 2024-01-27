@@ -13,5 +13,3 @@ def add_audio_to_video(video_path, audio_path, output_dir, start_delay=0.5):
     # Write the result to a file
     output_path = f'{output_dir}/video_with_voiceover.mp4'
     final_clip.write_videofile(output_path, codec='libx264', audio_codec='aac')
-
-#add_audio_to_video(video_path, audio_path, "output")

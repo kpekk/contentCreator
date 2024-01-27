@@ -1,4 +1,4 @@
-import requests, os
+import requests
 
 def generate_image(client, prompt, output_folder, output_file_name):
 

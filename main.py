@@ -1,10 +1,10 @@
 import os, math
 from common import get_openai_client
-from ideaGenerator import generate_ideas
-from imageCreator import generate_image
-from videoGenerator import generate_video_from_image
-from subtitleManager import add_subtitles_to_video
-from voiceGenerator import generate_commentary_audio
+from ideas import generate_ideas
+from image import generate_image
+from video import generate_video_from_image
+from subtitles import add_subtitles_to_video
+from voiceover import generate_commentary_audio
 from voiceoverToVideo import add_audio_to_video
 from moviepy.editor import AudioFileClip
 
@@ -18,7 +18,7 @@ def clean_everything_but_final_video(working_directory, file_to_keep="final_vide
             file_path = os.path.join(working_directory, file)
             os.remove(file_path)
 
-count = 5
+count = 30
 client = get_openai_client()
 video_frame_rate = 25 # frames per second
 
@@ -46,7 +46,7 @@ with open('output/list_of_ideas.txt', 'r') as file:
         # generate voicover
         generate_commentary_audio(client, commentary, output_directory)
 
-        # calculate the duration of the video to math the length of the audio
+        # calculate the duration of the video to match the length of the audio
         audio_duration = AudioFileClip(f"{output_directory}/commentary.mp3").duration
         video_duration_in_frames = (int) (math.ceil(audio_duration * video_frame_rate * 100) / 100)
         

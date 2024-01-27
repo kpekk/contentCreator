@@ -6,3 +6,5 @@ output
 
 #pycache
 __pycache__
+
+client_secret.json
