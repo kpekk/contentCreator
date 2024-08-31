@@ -8,10 +8,6 @@ from voiceover import generate_commentary_audio
 from voiceoverToVideo import add_audio_to_video
 from moviepy.editor import AudioFileClip
 
-# todo make video, commentary etc names parameters not hardcoded into smaller files
-# todo delay for audio and subtitles, about 0.2, 0.3
-# TODO text file into folder with title, description? and tags
-
 def clean_everything_but_final_video(working_directory, file_to_keep="final_video.mp4"):
     for file in os.listdir(working_directory):
         if file != file_to_keep:
@@ -37,7 +33,7 @@ with open('output/list_of_ideas.txt', 'r') as file:
         commentary = line[3].strip()
 
         output_directory = f'output/{short_description}'
-        os.makedirs(output_directory, exist_ok=True) #TODO throw error if folder exists and ignore?
+        os.makedirs(output_directory, exist_ok=True)
         print(f'[info] {short_description}:')
 
         # generate the base image
@@ -57,7 +53,7 @@ with open('output/list_of_ideas.txt', 'r') as file:
 
         # add voiceover to video
         add_audio_to_video(f"{output_directory}/initial_video.mp4", f"{output_directory}/commentary.mp3",
-                           output_directory, start_delay=0) # todo increase start delay to 0.3/0.4
+                           output_directory, start_delay=0)
 
         # add subtitles
         add_subtitles_to_video(output_directory, "video_with_voiceover.mp4", "final_video.mp4", 
