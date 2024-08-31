@@ -1,9 +1,6 @@
 # Environments
 .env
 
-#output folder
-output
-
 #pycache
 __pycache__
 
