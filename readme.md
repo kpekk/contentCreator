@@ -16,7 +16,8 @@ The idea consists of 3 parts:
 * Image description
 * A fact about the animal on the picture
 
-For every image:
+(For every generate idea:)
+
 2. (using ai) Generate a base image using the image description
 3. (using ai) Generate a voiceover for the video using the fact about the animal
 4. Generate a video using the image (the same image with a zoom in effect)
